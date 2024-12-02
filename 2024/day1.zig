@@ -12,10 +12,10 @@ pub fn main() !void {
     var i: u32 = 0;
     while (iter.next()) |lines| {
         if (i == MAX) break;
-        var line = std.mem.splitAny(u8, lines, "   ");
-        const left = std.mem.trim(u8, line.first(), " ");
+        var line = std.mem.tokenize(u8, lines, "   ");
+        const left = line.next().?;
         c1[i] = try parseInt(u32, left, 10);
-        const right = std.mem.trim(u8, line.rest(), " ");
+        const right = line.next().?;
         c2[i] = try parseInt(u32, right, 10);
         i += 1;
     }
